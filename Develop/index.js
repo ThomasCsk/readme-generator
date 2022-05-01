@@ -1,6 +1,8 @@
 // TODO: Include packages needed for this application
 
 const inquirer = require("inquirer");
+const fs = require("fs");
+const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -32,10 +34,23 @@ const questions = [
   },
   {
     type: 'input',
-    name: 'project',
+    name: 'email',
+    message: 'What is your Email Address? (Required)',
+    validate: emailInput => {
+      if (emailInput) {
+        return true;
+      } else {
+        console.log('Please enter your Email Address!');
+        return false;
+      }
+    }
+  },
+  {
+    type: 'input',
+    name: 'title',
     message: 'What is the title of this Project? (Required)',
-    validate: projectInput => {
-      if (projectInput) {
+    validate: titleInput => {
+      if (titleInput) {
         return true;
       } else {
         console.log('Please enter your Project title!');
@@ -88,10 +103,10 @@ const questions = [
     }
   },
   {
-    type: 'checkbox',
+    type: 'list',
     name: 'license',
     message: 'Please choose from the following list what kind of license you want this project to have.(Required)',
-    choices: ['None','Unlicense','Boost Software License 1.0','MIT License','Apache License 2.0','Mozilla Public License 2.0','GNU LGPLv3','GNU GPLv3','GNU AGPLv3'],
+    choices: ['None','Unlicense','Boost Software License 1.0','MIT License','Apache License 2.0'],
     validate: licenseInput => {
       if (licenseInput) {
         return true;
@@ -121,12 +136,34 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {
-  inquirer.prompt(questions);
+function writeToFile(fileName, data) {
+  return fs.writeFile(`./${fileName}.md`, data, err => {
+    if(err) console.log(err);
+    else console.log('file was created');
+  });
 }
 
+
+var readmeTitle = '';
+// TODO: Create a function to initialize app
+function init() {
+  inquirer.prompt(questions)
+   .then((answers) => {
+     console.log(answers);
+     readmeTitle = answers.title
+     return generateMarkdown(answers);
+   })
+  .then((content) => {
+    writeToFile(readmeTitle, content)
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+ 
+  
 // Function call to initialize app
-init();
+init()
+  
+  
+  
