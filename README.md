@@ -8,7 +8,7 @@
   
 - [Usage](#usage)
  
-- [Contributing](Contributing)
+- [Contributing](#contributing)
  
 - [License](#license)
 
