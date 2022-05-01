@@ -48,7 +48,7 @@ function renderLicenseLink(license) {
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
   if(license === 'None'){
-    return 'There is currently no license for this project. If you wish to ask to ask the project creator to add a license, please visit the questions section in this file for ways to contact them.'
+    return 'There is currently no license for this project. If you wish to ask the project creator to add a license, please check the questions section in this file for ways to contact them.'
   }
   else{
     return `This project is current operating under the following license:\n
@@ -58,10 +58,27 @@ function renderLicenseSection(license) {
 }
 
 function printToc(name){
-      return `\n- [${name}](${name})\n`;
+  var linkName = '';
+  switch(name){
+    case "Features":
+      linkName = '#features';
+      break;
+    case "Testing":
+      linkName = '#testing';
+      break;
+    case "Contributing":
+      linkName = '#contributing';
+      break;
+    case "Credits":
+      linkName = '#credits';
+      break;
+    default:
+      break;
+  }
+      return `\n- [${name}](${linkName})\n`; // Prints the link for the optional section
   }
 function printContent(name, input){
-      return `\n## ${name}\n\n${input}\n`;
+      return `\n## ${name}\n\n${input}\n`; // Prints the title and information for the given section
   }
 
 // TODO: Create a function to generate markdown for README
@@ -99,11 +116,10 @@ ${renderLicenseLink(data.license)}
 
 ## Questions
 
-If you have any questions, you can reach me at my Email:\n
+If you have any questions, you can reach me, ${data.name}, at my Email:\n
 [${data.email}](#${data.email})\n
 Or at my github account:\n
 [https://github.com/${data.github}](https://github.com/${data.github})
-
 `;
 }
 

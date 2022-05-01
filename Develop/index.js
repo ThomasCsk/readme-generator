@@ -148,16 +148,16 @@ function writeToFile(fileName, data) {
 var readmeTitle = ''; // Variable used to name the README file the same as the project name
 // TODO: Create a function to initialize app
 function init() {
-  inquirer.prompt(questions)
+  inquirer.prompt(questions) //prompts the user for inputs to questions above
    .then((answers) => {
-     readmeTitle = answers.title
-     return generateMarkdown(answers);
+     readmeTitle = answers.title // asigns the project title to the readme title
+     return generateMarkdown(answers); // generates the markdown file using the anwers to the prompts
    })
   .then((content) => {
-    writeToFile(readmeTitle, content)
+    writeToFile(readmeTitle, content) // makes the file using the information returned from the generateMarkdown function and the name of the project
   })
   .catch(err => {
-    console.log(err);
+    console.log(err); // logs an error if something doesnt work
   });
 }
  

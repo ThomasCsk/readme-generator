@@ -24,8 +24,8 @@ To install this project, just visit the GitHub link [https://github.com/ThomasCs
   
 ## Usage
   
-To use this project, you will first need to open the project in VS code. From there, you will open an integrated terminal and type in `npm install`. This will download the necessary packages for the project. You will then type `node index.js` into the terminal, which will then bring up the prompts that you should fill out. Once you fill out the prompts, your generated markdown file will have been created. 
- 
+To use this project, you will first need to open the project in VS code. From there, you will open an integrated terminal and type in `npm install`. This will download the necessary packages for the project. You will then type `node index.js` into the terminal, which will then bring up the prompts that you should fill out. Once you fill out the prompts, your generated markdown file will have been created.
+
 ## Contributing
 
 This project is completely open to the public. If you wish to use anything in it, feel free to do so. For legality's sake though, please checkout the license that this project is under.
