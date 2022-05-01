@@ -2,12 +2,13 @@
 
 const inquirer = require("inquirer");
 const fs = require("fs");
+
 const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = [
   {
-    type: 'input',
+    type: 'input', // Name Question
     name: 'name',
     message: 'What is your name? (Required)',
     validate: nameInput => {
@@ -20,7 +21,7 @@ const questions = [
     }
   },
   {
-    type: 'input',
+    type: 'input', // GitHub Question
     name: 'github',
     message: 'What is your GitHub Username? (Required)',
     validate: githubInput => {
@@ -33,7 +34,7 @@ const questions = [
     }
   },
   {
-    type: 'input',
+    type: 'input', // Email Question
     name: 'email',
     message: 'What is your Email Address? (Required)',
     validate: emailInput => {
@@ -46,7 +47,7 @@ const questions = [
     }
   },
   {
-    type: 'input',
+    type: 'input', // Project Title Question
     name: 'title',
     message: 'What is the title of this Project? (Required)',
     validate: titleInput => {
@@ -59,7 +60,7 @@ const questions = [
     }
   },
   {
-    type: 'input',
+    type: 'input', // Project Description Question
     name: 'description',
     message: 'Please provide a short description explaining the reasoning behind this project. (Required)',
     validate: descriptionInput => {
@@ -72,12 +73,12 @@ const questions = [
     }
   },
   {
-    type: 'input',
+    type: 'input', // Features Question
     name: 'features',
-    message: 'If there are a lot of features that need to be discussed in detail, you can do so here.',
+    message: 'If there are a lot of features that need to be discussed in detail, you can do so here. (Optional)',
   },
   {
-    type: 'input',
+    type: 'input', // Installation Question
     name: 'installation',
     message: 'Please provide a short description explaining the steps required to install your project. (Required)',
     validate: installationInput => {
@@ -90,7 +91,7 @@ const questions = [
     }
   },
   {
-    type: 'input',
+    type: 'input', // Usage Question
     name: 'usage',
     message: 'Please provide a short description explaining how to use this project. (Required)',
     validate: usageInput => {
@@ -103,10 +104,10 @@ const questions = [
     }
   },
   {
-    type: 'list',
+    type: 'list', // License Question
     name: 'license',
     message: 'Please choose from the following list what kind of license you want this project to have.(Required)',
-    choices: ['None','Unlicense','Boost Software License 1.0','MIT License','Apache License 2.0'],
+    choices: ['None','Unlicensed','MIT License','Apache License 2.0', 'ISC License', 'GNU GPLv3'],
     validate: licenseInput => {
       if (licenseInput) {
         return true;
@@ -117,21 +118,21 @@ const questions = [
     }
   },
   {
-    type: 'input',
+    type: 'input',  // Credits Question
     name: 'credits',
-    message: 'If you would like, you can use this section to thank collaborators and add links to their GitHub accounts, link and credit and third party applications that were used in this project, and give links to any tutorials that may have been used.',
+    message: 'If you would like, you can use this section to thank collaborators and add links to their GitHub accounts, link and credit and third party applications that were used in this project, and give links to any tutorials that may have been used. (Optional)',
 
   },
   {
-    type: 'input',
+    type: 'input', // Contributions Question
     name: 'contributions',
-    message: 'It you would like, you can include guidelines here that will explain to other developers exactly how to help work on and contribute to this project.',
+    message: 'If you would like, you can include guidelines here that will explain to other developers exactly how to help work on and contribute to this project. (Optional)',
   },
 
   {
-    type: 'input',
+    type: 'input', // Tests Question
     name: 'tests',
-    message: 'If you would like to include tests, please do so here along with instructions on how to run them.',
+    message: 'If you would like to include tests, please do so here along with instructions on how to run them. (Optional)',
   },
 ];
 
@@ -144,12 +145,11 @@ function writeToFile(fileName, data) {
 }
 
 
-var readmeTitle = '';
+var readmeTitle = ''; // Variable used to name the README file the same as the project name
 // TODO: Create a function to initialize app
 function init() {
   inquirer.prompt(questions)
    .then((answers) => {
-     console.log(answers);
      readmeTitle = answers.title
      return generateMarkdown(answers);
    })
